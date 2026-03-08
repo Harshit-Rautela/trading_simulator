@@ -34,6 +34,17 @@ async function startSocketServer() {
 
         io.emit("price_update", prices);
     })
+    // it is listening to the published event in orderController.
+    await redisSubscriber.subscribe("PORTFOLIO_UPDATE", (msg) => {
+        const update = JSON.parse(msg);
+        console.log("Portfolio update:", update);
+
+        io.emit("portfolio_update", update);
+    })
+    await redisSubscriber.subscribe("ORDER_BOOK_UPDATE",(msg)=>{
+        const data = JSON.parse(msg);
+         io.emit("order_book_update", data);
+    })
 
 }
 

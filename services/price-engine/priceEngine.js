@@ -26,7 +26,7 @@ async function startPriceEngine() {
             "PRICE_UPDATES",
             JSON.stringify(prices)
         );
-    }, 1000)
+    }, 4000)
 }
 
 startPriceEngine()
